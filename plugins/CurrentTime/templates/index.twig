@@ -1,0 +1,39 @@
+<h1 id="current-time-clock" class="clock center" onload="showTime()"></h1>
+<h4 class="center">{{ timezone }}</h4>
+
+<script>
+function showTime(){
+    var date = new Date();
+    var invdate = new Date(date.toLocaleString('en-US', {timeZone: "{{ timezone }}"}));
+    var diff = date.getTime() - invdate.getTime();
+    date = new Date(date.getTime() - diff);
+    date.toLocaleDateString("{{ language }}");
+
+    var h = date.getHours(); // 0 - 23
+    var m = date.getMinutes(); // 0 - 59
+    var s = date.getSeconds(); // 0 - 59
+    var session = "{{ use_12_hour }}" == 1 ? "AM" : "";
+
+    if(h == 0){
+        h = 12;
+    }
+
+    if(h > 12 && "{{ use_12_hour }}" == 1){
+        h = h - 12;
+        session = "PM";
+    }
+
+    h = (h < 10) ? "0" + h : h;
+    m = (m < 10) ? "0" + m : m;
+    s = (s < 10) ? "0" + s : s;
+
+    var time = h + ":" + m + ":" + s + " " + session;
+    document.getElementById("current-time-clock").innerText = time;
+    document.getElementById("current-time-clock").textContent = time;
+
+    setTimeout(showTime, 1000);
+
+}
+
+showTime();
+</script>

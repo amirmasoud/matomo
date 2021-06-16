@@ -1,0 +1,29 @@
+{
+    "name": "CurrentTime",
+    "description": "Show current time in selected timezone",
+    "version": "1.0.0",
+    "theme": false,
+    "require": {
+        "matomo": ">=4.4.0-b1,<5.0.0-b1"
+    },
+    "authors": [
+        {
+            "name": "Amirmasoud Sheydaei",
+            "email": "amirmasoud.sheydaei@gmail.com",
+            "homepage": "https://amirmasoud.me"
+        }
+    ],
+    "support": {
+        "email": "",
+        "issues": "",
+        "forum": "",
+        "irc": "",
+        "wiki": "",
+        "source": "",
+        "docs": "",
+        "rss": ""
+    },
+    "homepage": "",
+    "license": "GPL v3+",
+    "keywords": []
+}
