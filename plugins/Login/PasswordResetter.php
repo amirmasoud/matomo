@@ -170,8 +170,7 @@ class PasswordResetter
 
         $login = $user['login'];
 
-        $keySuffix = time() . Common::getRandomString($length = 32);
-        $token = $this->generatePasswordResetToken($user, $keySuffix);
+        $token = $this->generatePasswordResetToken($user);
         $this->savePasswordResetInfo($login, $newPassword, $token);
 
         // ... send email with confirmation link
@@ -270,7 +269,7 @@ class PasswordResetter
      *                                  the current timestamp.
      * @return string The generated token.
      */
-    public function generatePasswordResetToken($user, $keySuffix, $expiryTimestamp = null)
+    public function generatePasswordResetToken($user, $expiryTimestamp = null)
     {
         /*
          * Piwik does not store the generated password reset token.
@@ -282,7 +281,7 @@ class PasswordResetter
 
         $expiry = strftime('%Y%m%d%H', $expiryTimestamp);
         $token = $this->generateSecureHash(
-            $expiry . $user['login'] . $user['email'] . $user['ts_password_modified'] . $keySuffix,
+            $expiry . $user['login'] . $user['email'] . $user['ts_password_modified'],
             $user['password']
         );
         return $token;
