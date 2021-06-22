@@ -84,6 +84,19 @@
                  value="" inline-help="#jsTrackGroupByDomainInlineHelp">
             </div>
 
+            {# file buster #}
+            <div id="jsTrackFileBusterInlineHelp" class="inline-help-node">
+                {{ 'CoreAdminHome_JSTracking_FileBusterDesc1'|translate("<span class='current-site-host'></span>")|raw }}
+            </div>
+
+            <div piwik-field uicontrol="checkbox" name="javascript-tracking-file-buster"
+                 ng-model="jsTrackingCode.fileBuster"
+                 ng-change="jsTrackingCode.updateTrackingCode()"
+                 data-disabled="jsTrackingCode.isLoading"
+                 data-title="{{ 'CoreAdminHome_JSTracking_FileBuster'|translate|e('html_attr') }}"
+                 value="" inline-help="#jsTrackFileBusterInlineHelp">
+            </div>
+
             {# track across all site aliases #}
             <div id="jsTrackAllAliasesInlineHelp" class="inline-help-node">
                 {{ 'CoreAdminHome_JSTracking_MergeAliasesDesc'|translate("<span class='current-site-alias'></span>")|raw }}

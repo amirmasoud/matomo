@@ -94,6 +94,7 @@ class API extends \Piwik\Plugin\API
      * @param string $piwikUrl
      * @param bool $mergeSubdomains
      * @param bool $groupPageTitlesByDomain
+     * @param bool $fileBuster
      * @param bool $mergeAliasUrls
      * @param bool $visitorCustomVariables
      * @param bool $pageCustomVariables
@@ -106,10 +107,10 @@ class API extends \Piwik\Plugin\API
      * @return string The Javascript tag ready to be included on the HTML pages
      */
     public function getJavascriptTag($idSite, $piwikUrl = '', $mergeSubdomains = false, $groupPageTitlesByDomain = false,
-                                     $mergeAliasUrls = false, $visitorCustomVariables = false, $pageCustomVariables = false,
-                                     $customCampaignNameQueryParam = false, $customCampaignKeywordParam = false,
-                                     $doNotTrack = false, $disableCookies = false, $trackNoScript = false,
-                                     $crossDomain = false, $forceMatomoEndpoint = false)
+                                     $fileBuster = false, $mergeAliasUrls = false, $visitorCustomVariables = false,
+                                     $pageCustomVariables = false, $customCampaignNameQueryParam = false,
+                                     $customCampaignKeywordParam = false, $doNotTrack = false, $disableCookies = false,
+                                     $trackNoScript = false, $crossDomain = false, $forceMatomoEndpoint = false)
     {
         Piwik::checkUserHasViewAccess($idSite);
 
@@ -131,9 +132,9 @@ class API extends \Piwik\Plugin\API
         }
 
         $code = $generator->generate($idSite, $piwikUrl, $mergeSubdomains, $groupPageTitlesByDomain,
-                                     $mergeAliasUrls, $visitorCustomVariables, $pageCustomVariables,
-                                     $customCampaignNameQueryParam, $customCampaignKeywordParam,
-                                     $doNotTrack, $disableCookies, $trackNoScript, $crossDomain);
+                                     $fileBuster, $mergeAliasUrls, $visitorCustomVariables, $pageCustomVariables,
+                                     $customCampaignNameQueryParam, $customCampaignKeywordParam, $doNotTrack,
+                                     $disableCookies, $trackNoScript, $crossDomain);
         $code = str_replace(array('<br>', '<br />', '<br/>'), '', $code);
         return $code;
     }

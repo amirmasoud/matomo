@@ -82,6 +82,7 @@
             var params = {
                 piwikUrl: piwikHost + piwikPath,
                 groupPageTitlesByDomain: self.groupByDomain ? 1 : 0,
+                fileBuster: self.fileBuster ? 1 : 0,
                 mergeSubdomains: self.trackAllSubdomains ? 1 : 0,
                 mergeAliasUrls: self.trackAllAliases ? 1 : 0,
                 visitorCustomVariables: self.trackCustomVars ? getCustomVariables(self.customVars) : 0,

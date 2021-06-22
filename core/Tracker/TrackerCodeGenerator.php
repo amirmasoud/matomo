@@ -38,6 +38,7 @@ class TrackerCodeGenerator
      * @param string $piwikUrl http://path/to/piwik/site/
      * @param bool $mergeSubdomains
      * @param bool $groupPageTitlesByDomain
+     * @param bool $fileBuster
      * @param bool $mergeAliasUrls
      * @param array $visitorCustomVariables
      * @param array $pageCustomVariables
@@ -53,6 +54,7 @@ class TrackerCodeGenerator
         $piwikUrl,
         $mergeSubdomains = false,
         $groupPageTitlesByDomain = false,
+        $fileBuster = false,
         $mergeAliasUrls = false,
         $visitorCustomVariables = null,
         $pageCustomVariables = null,
@@ -76,6 +78,9 @@ class TrackerCodeGenerator
         $optionsBeforeTrackerUrl = '';
         if ($groupPageTitlesByDomain) {
             $options .= '  _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);' . "\n";
+        }
+        if ($fileBuster) {
+            $options .= '  _paq.push(["redirectFile", "'.$this->getSiteIdAddress($idSite).'"]);' . "\n";
         }
         if ($crossDomain) {
             // When enabling cross domain, we also need to call `setDomains`
@@ -159,9 +164,9 @@ class TrackerCodeGenerator
             $codeImpl['protocol'] = 'https://';
         }
 
-        $parameters = compact('mergeSubdomains', 'groupPageTitlesByDomain', 'mergeAliasUrls', 'visitorCustomVariables',
-            'pageCustomVariables', 'customCampaignNameQueryParam', 'customCampaignKeywordParam',
-            'doNotTrack');
+        $parameters = compact('mergeSubdomains', 'groupPageTitlesByDomain', 'fileBuster', 'mergeAliasUrls',
+            'visitorCustomVariables', 'pageCustomVariables', 'customCampaignNameQueryParam',
+            'customCampaignKeywordParam', 'doNotTrack');
 
         /**
          * Triggered when generating JavaScript tracking code server side. Plugins can use
@@ -235,6 +240,16 @@ class TrackerCodeGenerator
 
         // only since 3.7.0 we use the default matomo.js|php... for all other installs we need to keep BC
         return DbHelper::wasMatomoInstalledBeforeVersion('3.7.0-b1');
+    }
+
+    private function getSiteIdAddress($idSite)
+    {
+        try {
+            $websiteUrls = APISitesManager::getInstance()->getSiteUrlsFromId($idSite);
+            return count($websiteUrls) ? $websiteUrls[0] : '';
+        } catch (\Exception $e) {
+            return '';
+        }
     }
 
     private function getJavascriptTagOptions($idSite, $mergeSubdomains, $mergeAliasUrls)
