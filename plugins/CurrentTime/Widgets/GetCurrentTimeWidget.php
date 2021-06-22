@@ -29,12 +29,7 @@ class GetCurrentTimeWidget extends Widget
          * Set the category the widget belongs to. You can reuse any existing widget category or define
          * your own category.
          */
-        $config->setCategoryId('General_Visitors');
-
-        /**
-         * Set the subcategory the widget belongs to. If a subcategory is set, the widget will be shown in the UI.
-         */
-        // $config->setSubcategoryId('General_Overview');
+        $config->setCategoryId('Visitors');
 
         /**
          * Set the name of the widget belongs to.
@@ -45,23 +40,6 @@ class GetCurrentTimeWidget extends Widget
          * Set the order of the widget. The lower the number, the earlier the widget will be listed within a category.
          */
         $config->setOrder(99);
-
-        /**
-         * Optionally set URL parameters that will be used when this widget is requested.
-         * $config->setParameters(array('myparam' => 'myvalue'));
-         */
-
-        /**
-         * Define whether a widget is enabled or not. For instance some widgets might not be available to every user or
-         * might depend on a setting (such as Ecommerce) of a site. In such a case you can perform any checks and then
-         * set `true` or `false`. If your widget is only available to users having super user access you can do the
-         * following:
-         *
-         * $config->setIsEnabled(\Piwik\Piwik::hasUserSuperUserAccess());
-         * or
-         * if (!\Piwik\Piwik::hasUserSuperUserAccess())
-         *     $config->disable();
-         */
     }
 
     /**

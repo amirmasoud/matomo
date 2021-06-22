@@ -1,5 +1,9 @@
 ## FAQ
 
-__My question?__
+__How to install?__
 
-My answer
+Navigate to markplace or download it directely.
+
+__How to report a bug?__
+
+Submit a bug at [New Bug](https://github.com/org/repo/issues/new)
