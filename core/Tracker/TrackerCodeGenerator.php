@@ -242,6 +242,12 @@ class TrackerCodeGenerator
         return DbHelper::wasMatomoInstalledBeforeVersion('3.7.0-b1');
     }
 
+    /**
+     * Get first url of the list of urls for the given site id.
+     *
+     * @param integer $idSite
+     * @return string|\Exception
+     */
     private function getSiteIdAddress($idSite)
     {
         try {
